@@ -1,0 +1,4 @@
+<p>Bonjour,</p>
+<p>Veuillez trouver ci-dessous le lien vers votre cahier des charges :</p>
+<p><%= link_to 'Voir le cahier des charges', @url %></p>
+<p>Ce lien est valide jusqu'à <%= @specification.token_expiry.strftime("%d/%m/%Y %H:%M") %>.</p>

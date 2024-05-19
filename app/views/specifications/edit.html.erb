@@ -1,0 +1,177 @@
+<% if current_user %>
+  <h3 class="text-center mt-5">Modification d'un cahier des charges</h3>
+  <div class="container">
+    <%= form_with model: @specification, url: specification_path(@specification), method: :patch, local: true, html: { class: 'form-horizontal' } do |form| %>
+      <!-- Section accessible par les utilisateurs connectés -->
+      <div class="mb-3">
+        <%= form.label :title, class: 'form-label' %>
+        <%= form.text_field :title, class: 'form-control' %>
+      </div>
+      <div class="mb-3">
+        <%= form.label :description, class: 'form-label' %>
+        <%= form.text_area :description, class: 'form-control', rows: 5 %>
+      </div>
+      <div class="mb-3">
+        <%= form.label :client_email, class: 'form-label' %>
+        <%= form.email_field :client_email, class: 'form-control' %>
+      </div>
+      <div class="mb-3">
+        <%= form.label :token_expiry, class: 'form-label' %>
+        <%= form.datetime_local_field :token_expiry, class: 'form-control' %>
+      </div>
+      <div class="mb-3 text-center">
+        <%= form.submit "Modifier", class: 'btn btn-primary' %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+
+<div class="container mt-5">
+  <%= form_with model: @specification, url: specification_path(@specification), method: :patch, local: true, html: { class: 'form-horizontal' } do |form| %>
+    <% if !current_user && @specification.token_expiry < Time.now %>
+      <p class="text-danger">Le token a expiré</p>
+      <p>Veuillez contacter le commercial</p>
+    <% else %>
+      <!-- Section accessible par tous les utilisateurs -->
+      <h2>1/DESCRIPTIFS ETABLISSEMENT</h2>
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <%= form.label :enseigne, class: 'form-label' %>
+          <%= form.text_field :enseigne, class: 'form-control' %>
+        </div>
+        <div class="col-md-6 mb-3">
+          <%= form.label :raison_sociale, class: 'form-label' %>
+          <%= form.text_field :raison_sociale, class: 'form-control' %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <%= form.label :forme_juridique, class: 'form-label' %>
+          <%= form.text_field :forme_juridique, class: 'form-control' %>
+        </div>
+        <div class="col-md-6 mb-3">
+          <%= form.label :activite, class: 'form-label' %>
+          <%= form.text_field :activite, class: 'form-control' %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <%= form.label :rcs, class: 'form-label' %>
+          <%= form.text_field :rcs, class: 'form-control' %>
+        </div>
+        <div class="col-md-6 mb-3">
+          <%= form.label :code_ape, class: 'form-label' %>
+          <%= form.text_field :code_ape, class: 'form-control' %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <%= form.label :siret, class: 'form-label' %>
+          <%= form.text_field :siret, class: 'form-control' %>
+        </div>
+        <div class="col-md-6 mb-3">
+          <%= form.label :siren, class: 'form-label' %>
+          <%= form.text_field :siren, class: 'form-control' %>
+        </div>
+      </div>
+      <div class="mb-3">
+        <%= form.label :tva_intra, class: 'form-label' %>
+        <%= form.text_field :tva_intra, class: 'form-control' %>
+      </div>
+
+      <h3>Société</h3>
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <%= form.label :adresse_societe, class: 'form-label' %>
+          <%= form.text_field :adresse_societe, class: 'form-control' %>
+        </div>
+        <div class="col-md-6 mb-3">
+          <%= form.label :ville_societe, class: 'form-label' %>
+          <%= form.text_field :ville_societe, class: 'form-control' %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <%= form.label :cp_societe, class: 'form-label' %>
+          <%= form.text_field :cp_societe, class: 'form-control' %>
+        </div>
+        <div class="col-md-6 mb-3">
+          <%= form.label :tel_societe, class: 'form-label' %>
+          <%= form.text_field :tel_societe, class: 'form-control' %>
+        </div>
+      </div>
+      <div class="mb-3">
+        <%= form.label :mail_societe, class: 'form-label' %>
+        <%= form.email_field :mail_societe, class: 'form-control' %>
+      </div>
+
+      <h3>Gérant</h3>
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <%= form.label :nom_gerant, class: 'form-label' %>
+          <%= form.text_field :nom_gerant, class: 'form-control' %>
+        </div>
+        <div class="col-md-6 mb-3">
+          <%= form.label :prenom_gerant, class: 'form-label' %>
+          <%= form.text_field :prenom_gerant, class: 'form-control' %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <%= form.label :tel_gerant, class: 'form-label' %>
+          <%= form.text_field :tel_gerant, class: 'form-control' %>
+        </div>
+        <div class="col-md-6 mb-3">
+          <%= form.label :gsm_gerant, class: 'form-label' %>
+          <%= form.text_field :gsm_gerant, class: 'form-control' %>
+        </div>
+      </div>
+      <div class="mb-3">
+        <%= form.label :mail_gerant, class: 'form-label' %>
+        <%= form.email_field :mail_gerant, class: 'form-control' %>
+      </div>
+
+      <h3>Responsable</h3>
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <%= form.label :nom_responsable, class: 'form-label' %>
+          <%= form.text_field :nom_responsable, class: 'form-control' %>
+        </div>
+        <div class="col-md-6 mb-3">
+          <%= form.label :prenom_responsable, class: 'form-label' %>
+          <%= form.text_field :prenom_responsable, class: 'form-control' %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <%= form.label :tel_responsable, class: 'form-label' %>
+          <%= form.text_field :tel_responsable, class: 'form-control' %>
+        </div>
+        <div class="col-md-6 mb-3">
+          <%= form.label :gsm_responsable, class: 'form-label' %>
+          <%= form.text_field :gsm_responsable, class: 'form-control' %>
+        </div>
+      </div>
+      <div class="mb-3">
+        <%= form.label :mail_responsable, class: 'form-label' %>
+        <%= form.email_field :mail_responsable, class: 'form-control' %>
+      </div>
+
+      <h3>Prévisions</h3>
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <%= form.label :prevu_ouverture, class: 'form-label' %>
+          <%= form.datetime_local_field :prevu_ouverture, class: 'form-control' %>
+        </div>
+        <div class="col-md-6 mb-3">
+          <%= form.label :prevu_installation, class: 'form-label' %>
+          <%= form.datetime_local_field :prevu_installation, class: 'form-control' %>
+        </div>
+      </div>
+
+      <div class="mb-3 text-center">
+        <%= form.submit "Soumettre", class: 'btn btn-primary' %>
+      </div>
+    <% end %>
+  <% end %>
+</div>

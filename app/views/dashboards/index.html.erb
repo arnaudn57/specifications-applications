@@ -1,0 +1,29 @@
+<div class="container mt-5">
+  <h1 class="mb-4">Dashboard</h1>
+<%= csrf_meta_tags %>
+  <% if current_user %>
+    <p class="lead">Bonjour, <%= current_user.username %></p>
+  <% else %>
+    <p class="lead">Welcome, guest</p>
+  <% end %>
+
+  <div class="mb-4">
+    <%= link_to "Créer un cahier des charges", new_specification_path, class: "btn btn-primary" %>
+  </div>
+
+  <% @specifications.each do |specification| %>
+    <div class="card mb-3">
+      <div class="card-body">
+        <h2 class="card-title"><%= specification.title %></h2>
+        <p class="card-text"><%= specification.description %></p>
+        <p class="card-text">Client Email: <%= specification.client_email %></p>
+        <p class="card-text">Expiration du token le: <%= specification.token_expiry %></p>
+        <div class="d-flex justify-content-between">
+          <%= link_to "Voir", specification_path(specification), class: "btn btn-info" %>
+          <%= link_to "Supprimer", specification_path(specification), data: { turbo_method: :delete, confirm: "Êtes-vous sûr ?" }, class: "btn btn-danger" %>
+
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

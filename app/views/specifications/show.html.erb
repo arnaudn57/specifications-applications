@@ -1,0 +1,92 @@
+<% if current_user %>
+  <div class="container mt-4">
+    <div class="d-flex justify-content-between mb-3">
+      <h1><%= @specification.title %></h1>
+      <div>
+        <%= link_to "Modifier", edit_specification_path(@specification), class: "btn btn-warning me-2" %>
+        <%= link_to "Supprimer", specification_path(@specification), data: { turbo_method: :delete, confirm: "Êtes-vous sûr ?" }, class: "btn btn-danger" %>
+      </div>
+    </div>
+    <p><%= @specification.description %></p>
+    <p><strong>Client Email:</strong> <%= @specification.client_email %></p>
+  </div>
+<% end %>
+
+<% if @specification.token_expiry < Time.now %>
+  <div class="container mt-4">
+    <p class="text-danger">Le token a expiré</p>
+    <p>Veuillez contacter le commercial</p>
+  </div>
+<% else %>
+  <div class="container mt-4">
+    <div class="d-flex justify-content-between mb-3">
+      <h2>1/DESCRIPTIFS ETABLISSEMENT</h2>
+      <button onclick="window.print()" class="btn btn-primary">Imprimer</button>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <p><strong>Enseigne:</strong> <%= @specification.enseigne %></p>
+        <p><strong>Raison Sociale:</strong> <%= @specification.raison_sociale %></p>
+        <p><strong>Forme Juridique:</strong> <%= @specification.forme_juridique %></p>
+        <p><strong>Activité:</strong> <%= @specification.activite %></p>
+      </div>
+      <div class="col-md-6">
+        <p><strong>RCS:</strong> <%= @specification.rcs %></p>
+        <p><strong>Code APE:</strong> <%= @specification.code_ape %></p>
+        <p><strong>Siret:</strong> <%= @specification.siret %></p>
+        <p><strong>Siren:</strong> <%= @specification.siren %></p>
+        <p><strong>TVA INTRA:</strong> <%= @specification.tva_intra %></p>
+      </div>
+    </div>
+
+    <h3>Société</h3>
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <p><strong>Adresse:</strong> <%= @specification.adresse_societe %></p>
+        <p><strong>Ville:</strong> <%= @specification.ville_societe %></p>
+        <p><strong>CP:</strong> <%= @specification.cp_societe %></p>
+      </div>
+      <div class="col-md-6">
+        <p><strong>Tél:</strong> <%= @specification.tel_societe %></p>
+        <p><strong>Mail:</strong> <%= @specification.mail_societe %></p>
+      </div>
+    </div>
+
+    <h3>Gérant</h3>
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <p><strong>Nom:</strong> <%= @specification.nom_gerant %></p>
+        <p><strong>Prénom:</strong> <%= @specification.prenom_gerant %></p>
+      </div>
+      <div class="col-md-6">
+        <p><strong>Tél:</strong> <%= @specification.tel_gerant %></p>
+        <p><strong>Gsm:</strong> <%= @specification.gsm_gerant %></p>
+        <p><strong>Mail:</strong> <%= @specification.mail_gerant %></p>
+      </div>
+    </div>
+
+    <h3>Responsable</h3>
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <p><strong>Nom:</strong> <%= @specification.nom_responsable %></p>
+        <p><strong>Prénom:</strong> <%= @specification.prenom_responsable %></p>
+      </div>
+      <div class="col-md-6">
+        <p><strong>Tél:</strong> <%= @specification.tel_responsable %></p>
+        <p><strong>Gsm:</strong> <%= @specification.gsm_responsable %></p>
+        <p><strong>Mail:</strong> <%= @specification.mail_responsable %></p>
+      </div>
+    </div>
+
+    <h3>Prévisions</h3>
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <p><strong>Prévu Ouverture:</strong> <%= @specification.prevu_ouverture %></p>
+      </div>
+      <div class="col-md-6">
+        <p><strong>Prévu Installation:</strong> <%= @specification.prevu_installation %></p>
+      </div>
+    </div>
+  </div>
+<% end %>
