@@ -1,0 +1,10 @@
+<h3 class="text-center mt-5">6/Reconnaissance utilisateurs</h3>
+<div class="container">
+     <%= form_with model: @specification, url: specification_path(@specification), method: :patch, local: true, html: { class: 'form-horizontal' } do |form| %>
+     <%= form.hidden_field :step %>
+    <div class="mb-3 text-center">
+      <%= form.submit "Précédent", class: 'btn btn-secondary', name: "commit" %>
+      <%= form.submit "Suivant", class: 'btn btn-primary', name: "commit" %>
+    </div>
+  <% end %>
+</div>

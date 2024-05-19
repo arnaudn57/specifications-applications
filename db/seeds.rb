@@ -7,7 +7,9 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 #Create Company
+puts "Creating Company"
 Company.create(name: "CKEL")
 
 #Create User Admin
+puts "Creating User Admin"
 User.create(email: "arnaud.nicastro@gmail.com", username:"Arnaud Nicastro", password: "123456", password_confirmation: "123456", company_id: 1)
